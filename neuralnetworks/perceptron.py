@@ -30,7 +30,7 @@ class Perceptron:
 		Parameters
 		==========
 		trainingSet : list<list>
-		A python list matrix with the training set. Make sure the the class is 
+		A python list matrix with the training set. Make sure that the class is 
 		in the last column and it is numerical.
 		
 		alpha : float

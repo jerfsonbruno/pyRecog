@@ -1,4 +1,5 @@
 from .distances import euclidean
+from random import random
 
 def kmeans(k, datapoints):
 	"""
@@ -13,7 +14,13 @@ def kmeans(k, datapoints):
 		A python list with the datapoints
 	"""
 	centers = [-1] * k
-	new_centers = datapoints[:k]
+	new_centers = []
+	for i in range(k):
+		center = []
+		for j in range(len(datapoints[0])):
+			center += [random()]
+		new_centers += [center]
+
 	center_sets = {}
 	while centers != new_centers:
 		centers = list(new_centers) # copy new centers to centers
@@ -36,6 +43,8 @@ def kmeans(k, datapoints):
 		# update centers
 		for c in range(len(centers)):
 			# for every center
+			if len(center_sets[c]) == 0:
+				continue
 			sigma = datapoints[center_sets[c][0]]
 			ct = 1.0
 			for dpoint_index in center_sets[c][1:]:
@@ -43,7 +52,7 @@ def kmeans(k, datapoints):
 				ct += 1.0
 			# update the center
 			new_centers[c] = divx(sigma, ct)
-	return center_sets
+	return center_sets, new_centers
 
 def sumx(xs,ys):
 	if type(xs) != list:
@@ -52,6 +61,15 @@ def sumx(xs,ys):
 		result = [0] * len(xs)
 		for i in range(len(xs)):
 			result[i] = sumx(xs[i],ys[i])
+		return result
+
+def subx(xs,ys):
+	if type(xs) != list:
+		return xs - ys
+	else:
+		result = [0] * len(xs)
+		for i in range(len(xs)):
+			result[i] = subx(xs[i],ys[i])
 		return result
 
 def divx(xs, y):
