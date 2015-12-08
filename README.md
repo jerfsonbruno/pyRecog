@@ -16,5 +16,5 @@ Perceptron is available.
 
 ## distbased
 
-A module containing classification algorithms based on Distance. Currently, only KNN is available.
-There are 3 distance metrics available: euclidian, supreme and manhatam.
+A module containing classification algorithms based on Distance. Currently, only KNN and kMeans are available.
+There are 3 distance metrics available: euclidean, supreme and manhatam.
