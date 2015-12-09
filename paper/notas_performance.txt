@@ -1,0 +1,3 @@
+Cosseno = 0.00511
+Seno = 0.00731
+Logistic = 0.00490

@@ -130,9 +130,8 @@ class RBF:
 				instance_error = instance_error / 2.0
 				curr_error += instance_error
 			curr_error = curr_error/float(len(z))
-			sys.stdout.write("\n"+str(curr_error)+"... epoch "+str(nepochs)+"/"+str(maxEpochs)+"                                                  ")
+			sys.stdout.write("\r"+str(curr_error)+" of mean squared error in epoch "+str(nepochs)+"/"+str(maxEpochs)+"                                                                     ")
 			nepochs += 1
-			print(nepochs < maxEpochs and curr_error > errGoal)
 		return self.weights
 
 	def __call__(self, instance):
