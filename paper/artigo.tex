@@ -8,6 +8,7 @@
 \usepackage{graphicx}
 \usepackage{mathtools}
 \usepackage{amsmath}
+\usepackage[nolist,footnote]{acronym}
 
 \hyphenation{op-tical net-works semi-conduc-tor}    
 
@@ -25,6 +26,11 @@
 
 \begin{document}
 \maketitle
+
+\begin{acronym}
+\acro{mlp}[MLP]{Multilayered Perceptron}
+\acro{rbf}[RBF]{Radial Basis Function}
+\end{acronym}
 
 \begin{abstract}
 Dentro da área de modelagem matemática, uma rede de função de base radial (RBF) 
@@ -44,9 +50,75 @@ Aprendizado de máquina, redes neurais, regressão
 \end{IEEEkeywords}
 
 \section{Introdução}
+\label{introducao}
 
+O Perceptron de Múltiplas Camadas, ou \ac{mlp} treinado com o algoritmo \textit{
+Backpropagation} \cite{Rumelhart:1988:LIR:65669.104449} é um dos mais 
+importantes modelos de Redes Neurais até hoje, devido a sua universal capacidade 
+de aproximar funções. Ele é amplamente utilizado em diversos tipos de problemas, 
+como regressão, classificação, extração de atributos e memória associativa 
+\cite{wu2012using}.
+
+Em 1988, Broomhead e Lowe propuseram o modelo de rede função de base radial, 
+também conhecidas como \ac{rbf} \cite{2144306}. Essas redes, da mesma forma que 
+as \acp*{mlp} são universais, como mostrado em 
+\cite{Park:1991:UAU:110084.110093}, porém exigem um tempo mais curto para o 
+treinamento, o que as torna excelentes alternativas.
+
+\subsection{Regressão e Classificação}
+\label{regressaoxclassificacao}
+
+Enquanto que problemas de classificação envolvem identificar categorias para 
+uma determinada instância no conjunto de dados, regressão está ligada a estimar 
+ou prever uma resposta dada como entrada uma instância do conjunto de dados. 
+Os dois podem ser diferenciados também pelo fato de que qualquer resposta 
+para um problema de classificação é igualmente errada, ao passo que, na 
+regressão, existe uma ideia de distância entre as respostas: uma delas pode 
+estar mais próxima da resposta correta do que outra. De forma mais simples, 
+pode-se dizer que, nos problemas de classificação, as) variáveis de saída 
+assumem valores discretos, normalmente, rótulos de classes distintas. Por outro 
+lado, nos problemas de regressão, as variáveis de saída assumem valores 
+discretos.
+
+Se as variáveis a serem estimadas forem valores futuros, então o procedimento 
+sendo construído é um preditor. Caso as variáveis a serem estimadas relacionem 
+entradas com saídas, então o procedimento sendo construído é chamado de modelo
+\cite{specht1991general}.
+
+Embora tenha sido largamente utilizada na literatura para problemas de 
+classificação (\cite{heartrbf}, \cite{wu2012using}, 
+\cite{DBLP:conf/isnn/ZhaoYWWL06}), há poucos trabalhos que mostram o potencial 
+das redes \ac*{rbf} para problemas de regressão. Este último será o problema 
+tratado no presente artigo.
+
+\subsection{Estrutura do Texto}
+\label{estrutura}
+
+Este trabalho está estruturado da seguinte forma: na seção \ref{relacionados}, 
+serão descritos alguns dos trabalhos relacionados ao tema da presente pesquisa; 
+na seção \ref{problema} serão apresentados o problema sendo tratado e suas 
+principais características; na seção \ref{rbf} serão apresentadas as redes 
+\ac*{rbf}; na seção \ref{resultados} serão mostrados alguns dos resultados 
+obtidos para problemas de regressão utilizando \acp*{rbf}; por fim, a seção 
+\ref{conclusao} conclui este trabalho com algumas considerações finais.
+
+\section{Trabalhos Relacionados}
+\label{relacionados}
+
+\section{O Problema}
+\label{problema}
+
+Um parágrafo pequeno. Usar o Specht, sessão II.
+
+\section{Redes RBF}
+\label{rbf}
+
+\section{Regressão com redes RBF}
+\label{resultados}
 
 \section{Conclusão}
+\label{conclusao}
+
 The conclusion goes here.
 
 \section*{Agradecimentos}

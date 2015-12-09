@@ -2560,7 +2560,7 @@
 \def\appendixname{Appendix}
 \def\abstractname{Abstract}
 % IEEE specific names
-\def\IEEEkeywordsname{Index Terms}
+\def\IEEEkeywordsname{Palavras-chave}
 \def\IEEEproofname{Proof}
 
 
