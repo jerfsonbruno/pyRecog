@@ -8,6 +8,11 @@
 \usepackage{graphicx}
 \usepackage{mathtools}
 \usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{array}
+\usetikzlibrary{arrows}
 \usepackage[nolist,footnote]{acronym}
 
 \hyphenation{op-tical net-works semi-conduc-tor}    
@@ -23,6 +28,9 @@
 
 \markboth{Disciplina de Redes Neurais, Dezembro~2015}%
 {Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for Journals}
+
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
 
 \begin{document}
 \maketitle
@@ -99,8 +107,10 @@ serão descritos alguns dos trabalhos relacionados ao tema da presente pesquisa;
 na seção \ref{problema} serão apresentados o problema sendo tratado e suas 
 principais características; na seção \ref{rbf} serão apresentadas as redes 
 \ac*{rbf}; na seção \ref{resultados} serão mostrados alguns dos resultados 
-obtidos para problemas de regressão utilizando \acp*{rbf}; por fim, a seção 
-\ref{conclusao} conclui este trabalho com algumas considerações finais.
+obtidos para problemas de regressão utilizando \acp*{rbf} na seção 
+\ref{trabalhos_futuros} serão apresentados alguns dos possíveis trabalhos a 
+serem derivados a partir desta pesquisa; por fim, a seção \ref{conclusao} 
+conclui este trabalho com algumas considerações finais.
 
 \section{Trabalhos Relacionados}
 \label{relacionados}
@@ -148,8 +158,8 @@ com ruídos) e seus respectivos valores de $Y$. Essas variáveis $X$ e $Y$ são,
 normalmente, vetores. No sistema, a variável dependente, $Y$, é a saída, 
 enquanto que a variável independente, $X$ é a entrada.
 
-Observe, por exemplo, a figura \ref{fig:regressao}. Ela representa um exemplo 
-de tais dados, com os valores de $X$ e $Y$ nos eixos.
+Observe, por exemplo, a figura \ref{fig:regressao}. Ela representa um 
+exemplo de tais dados, com os valores de $X$ e $Y$ nos eixos.
 
 \begin{figure}[t]
 	\caption{Exemplo de dados disponíveis para regressão.}
@@ -178,14 +188,218 @@ No decorrer deste trabalho, esse problema será tratado utilizando redes neurais
 \section{Redes RBF}
 \label{rbf}
 
+As Redes \ac*{rbf} são redes neurais artificiais \textit{feed-foward} de 
+múltiplas camadas. Elas possuem, em geral, uma camada de entrada, uma camada 
+neural escondida e uma camada neural de saída \cite{wu2012using}. A figura 
+\ref{fig:rbf} detalha melhor a arquitetura dessas redes.
+
+\begin{figure}[t]
+	\caption{Configuração típica da rede \ac*{rbf}}
+	\centering
+	\vspace*{19pt}
+	\begin{tikzpicture}[every node/.style={circle, draw=black, minimum size=17pt,inner sep=0pt}]
+	
+	\tikzset{edge/.style = {->,> = latex'}}
+	
+	\node (1)  at (0,4)   {$x_{1}$};
+	\node (2)  at (0,2)   {$x_{2}$};
+	\node[draw=white] (3)  at (0,1)   {...};
+	\node (4)  at (0,0)   {$x_{n}$};
+	
+	\node (5)  at (2,4)   {$u_{1}$};
+	\node (6)  at (2,2)   {$u_{2}$};
+	\node[draw=white] (7)  at (2,1)   {...};
+	\node (8)  at (2,0)   {$u_{n_{1}}$};
+	
+	\node (9)  at (4,3)   {$u_{1}$};
+	\node[draw=white] (10)  at (4,2)   {...};
+	\node (11)  at (4,1)   {$u_{n_{2}}$};
+	
+	\node[draw=white] (12)  at (5,3.5) {$-\theta_{1}$};
+	\node[draw=white] (13)  at (5,1.5) {$-\theta_{n_{2}}$};
+	
+	\foreach \source/\dest in {1/5,1/6,1/8,2/5,2/6,2/8,4/5,4/6,4/8,5/9,5/11,6/9,6/11,8/9,8/11,12/9,13/11}
+	\draw[edge] (\source) to (\dest);
+	
+	\end{tikzpicture}
+	\label{fig:rbf}
+\end{figure}
+
+As grandes diferenças entre as \acp*{rbf} as redes \ac*{mlp} estão na função de 
+ativação e no treinamento da camada neural escondida \cite{daredes}.
+
+As funções de ativação utilizadas nos neurônios da camada escondida são 
+justamente aquelas que dão nome ao algoritmo: as funções de base radial. Dentre 
+elas, a mais utilizada é a função gaussiana \cite{gaussian}, dada pela expressão 
+abaixo e ilustrada na figura \ref{fig:gaussian}.
+
+$$g(u) = e^{-\frac{(u-c)^{2}}{2\sigma^{2}}}$$
+
+Onde $c$ define o centro da função gaussiana e $\sigma^{2}$ denota a variância.
+
+Já o treinamento das redes \ac*{rbf} é dividido em duas fases: uma fase não 
+supervisionada e uma supervisionada \cite{daredes}. Na primeira fase do 
+treinamento, são ajustados os pesos dos neurônios da camada escondida, que 
+efetivamente correspondem ao parâmetro $c$ da função gaussiana. Isso significa 
+que quanto mais próxima do centro de um determinado neurônio uma instância 
+estiver, maior será a saída daquele neurônio para aquela entrada.
+
+Um dos métodos mais utilizados para calcular os centros das gaussianas é o 
+algoritmo $k$-\textit{means} \cite{daredes}. O parâmetro $k$ desse algoritmo 
+será precisamente o número de neurônios na camada escondida. Nesta pesquisa 
+foi utilizado este algoritmo para o treinamento não supervisionado.
+
+Só depois que a etapa não supervisionada estiver completa, é iniciada a última 
+fase. Nesta etapa é feito um treinamento supervisionado utilizando a regra delta 
+generalizada para ajustar os pesos dos neurônios da camada de saída de forma 
+similar ao treinamento da rede \ac*{mlp} \cite{daredes}.
+
+Para problemas de classificação, a saída da rede é, normalmente, uma das 
+possíveis classes presentes no problema na qual a instância de entrada deve 
+pertencer segundo o modelo, ou seja, a saída é um valor discreto. Mas para 
+problemas de regressão, a saída é o valor da variável dependente ($Y$) 
+encontrada pelo modelo, ou seja, um valor contínuo. Neste trabalho foi 
+utilizada a função linear como função de ativação dos neurônios na camada de 
+saída.
+
+\begin{figure}[t]
+	\caption{Função gaussiana com $\sigma^{2} = 0.05$ e $c = 0$}
+	\label{fig:gaussian}
+	\centering
+	\includegraphics[width=0.40\textwidth]{gaussian}
+\end{figure}
 
 \section{Regressão com redes RBF}
 \label{resultados}
 
+\begin{table*}[t]
+	\centering
+	\caption{Resultados obtidos}
+	\label{corrmatrix}
+	\begin{tabular}{l c c l c c l c c}
+		\toprule
+		Logística & & & Seno & & & Cosseno & & \\
+		\midrule
+		{} & 3 & 0.001500 & {} & 3 & 0.095880 & {} & 3 & 0.011652 \\
+		{} & 4 & 0.000588 & {} & 4 & 0.006498 & {} & 4 & 0.000908 \\
+		{} & 5 & 0.000443 & {} & 5 & 0.002339 & {} & 5 & 0.001868 \\
+		{} & 6 & 0.000265 & {} & 6 & 0.001677 & {} & 6 & 0.000469 \\
+		{} & 7 & 0.000483 & {} & 7 & 0.000614 & {} & 7 & 0.000722 \\
+		{} & 8 & 0.000370 & {} & 8 & 0.000548 & {} & 8 & 0.000572 \\
+		{} & 9 & 0.001110 & {} & 9 & 0.000392 & {} & 9 & 0.000386 \\
+		{} & 10 & 0.000721 & {} & 10 & 0.000901 & {} & 10 & 0.000218 \\
+		\bottomrule
+	\end{tabular}
+\end{table*}
+
+
+\begin{figure}[b]
+	\caption{Dados para base de treinamento obtidos através da aplicação de 
+		ruído na função seno}
+	\label{fig:seno_dados}
+	\centering
+	\includegraphics[width=0.40\textwidth]{sin_5v1_train_data_paper}
+\end{figure}
+
+Dadas as configurações explanadas na seção \ref{fig:rbf}, esta seção visa 
+ilustrar os resultados obtidos para problemas de regressão utilizando redes 
+\ac*{rbf}.
+
+Para isso, foram construídas três bases de dados. Na primeira, foram 
+calculados cinquenta pontos entre $0$ e $2\pi$. Para cada ponto, $x$, assim 
+definido, foi aplicada a função seno e a esse valor foi adicionado um pequeno 
+ruído gaussiano. De forma que, para cada $x$, temos um $y = sen(x) + 
+\epsilon$, onde $\epsilon$ é um valor aleatório provido de uma distribuição 
+normal. Como resultado, foi obtida a base ilustrada na figura 
+\ref{fig:seno_dados}. Na segunda base, o mesmo processo foi feito para a função 
+cosseno, ou seja, para cada $x$ temos que $y = cos(x) + \epsilon$ e o 
+resultado está na figura \ref{fig:cosseno_dados}.
+
+Por fim, para a última base de dados, foram calculados cinquenta pontos entre 
+$-1$ e $1$. Para cada ponto, $x$, foi aplicada a função logística \cite{logist} 
+definida abaixo:
+
+$$f(x) = \frac{L}{1 + e^{-k(x-x_{0})}}$$
+
+Onde $L$ é o maior valor da curva, $x_{0}$ é o valor, no eixo $X$, do ponto 
+médio da sigmoide e $k$ representa a declividade da curva. Foram utilizados os 
+valores $L = 1$, $k = 4$ e $x_{0} = 0$.
+
+Além de aplicada a função logística para cada $x$ também foi adicionado um 
+pequeno ruído gaussiano. Assim, para um dado valor de $x$, $y = f(x) + 
+\epsilon$, onde $\epsilon$ é um valor aleatório provido por uma distribuição 
+normal. Os pontos dessa base podem ser visualizados na figura 
+\ref{fig:logistica}.
+
+\begin{figure}[t]
+	\caption{Dados para base de treinamento obtidos através da aplicação de 
+		ruído na função cosseno}
+	\label{fig:cosseno_dados}
+	\centering
+	\includegraphics[width=0.40\textwidth]{cos_5v1_train_data_paper}
+\end{figure}
+
+\begin{figure}[b]
+	\caption{Dados para base de treinamento obtidos através da aplicação de 
+		ruído na função cosseno}
+	\label{fig:logistica}
+	\centering
+	\includegraphics[width=0.40\textwidth]{f_5v1_train_data_paper}
+\end{figure}
+
+
+Uma vez que as bases estavam montadas, elas foram utilizadas para treinar uma 
+rede neural \ac*{rbf}. Uma vez que o treinamento foi finalizado, esse modelos 
+foram utilizados para calcular o valor esperado de $y$, para cada uma das três 
+funções. Porém, para estas avaliações, foram utilizados quatrocentos valores ao 
+invés de apenas cinquenta. Além disso, o número de neurônios na camada escondida 
+foi variado entre 3 e 5. A métrica utilizada para avaliação foi o erro 
+quadrático médio definido por \cite{daredes} da seguinte forma: 
+
+$$E_{M} = \frac{1}{p}\sum_{k=1}^{p}\frac{1}{2}\sum_{i=1}^{n_{2}}
+(d_{j}(k)-y_{j}^{2}(k))^{2}$$
+
+Onde $p$ é o número de amostras, $n_{2}$ é o número de neurônios na camada de 
+saída, $d_{j}(k)$ é a saída correta do $j$-ésimo neurônio da camada de saída 
+para a $k$-ésima amostra  e $y_{j}^{2}(k)$ é a saída obtida pelo $j$-ésimo 
+neurônio da camada de saída para a amostra $k$.
+
+Os resultados obtidos estão sumarizados na tabela \ref{tbl:resultados}. 
+Ilustrações dos modelos encontrados estão disponíveis nas figuras 
+\ref{fig:rsl_seno}, \ref{fig:rsl_cos} e \ref{fig:rsl_logistic}.
+
+Olhando estes resultados, pode-se concluir primeiramente que as redes \ac*{rbf} 
+foram muito bem em capturar a relação entre a variável independente $X$ e a 
+variável dependente $Y$.
+
+Além disso, é possível perceber que para a base feita com a função logística, 
+aumentar o número de neurônios na camada escondida para além de seis, não trouxe 
+melhores resultados. Para a base feita a partir da função seno observa-se uma 
+considerável acentuação do erro quadrático médio na mudança de nove para dez 
+neurônios, porém, seriam necessários mais experimentos para ter certeza que 
+essa tendência se mantém a medida que o número de neurônios sobem. Já para a 
+base feita com a função cosseno, valeu a regra de quanto mais neurônios, 
+melhor o resultado, pelo menos até dez neurônios.
+
+Por fim, é importante notar que a base que apresentou a maior dificuldade para 
+as redes \ac*{rbf} foi a base montada a partir da função seno.
+
+\section{Trabalhos Futuros}
+\label{trabalhos_futuros}
+
+Ficam como trabalhos futuros desta pesquisa realizar mais experimentos para 
+entender melhor a relação entre a quantidade de neurônios e a variação no erro 
+quadrático médio encontrado.
+
+Também seria interessante, utilizar outras bases de dados de problemas de 
+regressão para verificar a performance das redes \ac*{rbf}. Por exemplo, 
+poderiam ser utilizadas bases de problemas do mundo real, como a de previsão 
+de subida/descida da bolsa de valores ou de preços de imóveis.
+
 \section{Conclusão}
 \label{conclusao}
 
-The conclusion goes here.
+Os problemas de regressão se mostram bastante desa
 
 \section*{Agradecimentos}
 We acknowledge the acknowledged acknowledgees.
