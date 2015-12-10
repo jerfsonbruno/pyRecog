@@ -140,10 +140,44 @@ se redes \ac*{rbf} são boas alternativas para problemas de regressão.
 \section{O Problema}
 \label{problema}
 
-Um parágrafo pequeno. Usar o Specht, sessão II.
+O problema de regressão \cite{specht1991general} pode ser definido da seguinte 
+forma: para uma determinada variável, $Y$, dependente em uma variável, $X$, 
+independente, é a computação do valor mais provável de $Y$ para cada valor de 
+$X$, tendo como base apenas um número finito de medições de $X$ (possivelmente 
+com ruídos) e seus respectivos valores de $Y$. Essas variáveis $X$ e $Y$ são, 
+normalmente, vetores. No sistema, a variável dependente, $Y$, é a saída, 
+enquanto que a variável independente, $X$ é a entrada.
+
+Observe, por exemplo, a figura \ref{fig:regressao}. Ela representa um exemplo 
+de tais dados, com os valores de $X$ e $Y$ nos eixos.
+
+\begin{figure}[t]
+	\caption{Exemplo de dados disponíveis para regressão.}
+	\label{fig:regressao}
+	\centering
+	\includegraphics[width=0.40\textwidth]{regression_data_example}
+\end{figure}
+
+Para implementar uma solução é, normalmente, necessário assumir alguma função 
+com parâmetros desconhecidos $a_{i}$. Os valores desses parâmetros são então 
+calibrados para melhor ajuste da função aos dados observados. No caso da 
+regressão linear, por exemplo, a saída é assumida como uma função linear da 
+entrada, e assim, os parâmetros desconhecidos, $a_{i}$ seriam os coeficientes 
+lineares da função.
+
+Ou seja, o problema de regressão pode ser resumido em encontrar um modelo capaz 
+de prever corretamente (ou com menor erro possível) o valor da saída do sistema
+através do ajuste de parâmetros internos do modelo. A entrada para esse ajuste é 
+um conjunto $\{x_{i}, \hat{y}_{i}\}_{i=1}^{p}$. Onde $x_{i}$ é o valor da 
+$i$-ésima observação da variável independente $X$ e $\hat{y}_{i}$ é o valor da 
+variável dependente $Y$, dado o valor de $X$.
+
+No decorrer deste trabalho, esse problema será tratado utilizando redes neurais 
+\acp*{rbf} para relacionar a entrada, $X$ e a saída, $Y$.
 
 \section{Redes RBF}
 \label{rbf}
+
 
 \section{Regressão com redes RBF}
 \label{resultados}
