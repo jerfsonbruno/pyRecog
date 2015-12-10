@@ -365,12 +365,21 @@ para a $k$-ésima amostra  e $y_{j}^{2}(k)$ é a saída obtida pelo $j$-ésimo
 neurônio da camada de saída para a amostra $k$.
 
 Os resultados obtidos estão sumarizados na tabela \ref{tbl:resultados}. 
-Ilustrações dos modelos encontrados estão disponíveis nas figuras 
-\ref{fig:rsl_seno}, \ref{fig:rsl_cos} e \ref{fig:rsl_logistic}.
+Ilustrações dos modelos encontrados para cinco neurônios na camada escondida 
+estão disponíveis nas figuras \ref{fig:rsl_seno}, \ref{fig:rsl_cos} e 
+\ref{fig:rsl_logistic}.
 
 Olhando estes resultados, pode-se concluir primeiramente que as redes \ac*{rbf} 
 foram muito bem em capturar a relação entre a variável independente $X$ e a 
 variável dependente $Y$.
+
+\begin{figure}[b]
+	\caption{Modelo obtido pela rede \ac*{rbf} para a base construída a partir 
+		da função seno}
+	\label{fig:rsl_seno}
+	\centering
+	\includegraphics[width=0.40\textwidth]{sin_5v1_all_paper}
+\end{figure}
 
 Além disso, é possível perceber que para a base feita com a função logística, 
 aumentar o número de neurônios na camada escondida para além de seis, não trouxe 
@@ -382,7 +391,9 @@ base feita com a função cosseno, valeu a regra de quanto mais neurônios,
 melhor o resultado, pelo menos até dez neurônios.
 
 Por fim, é importante notar que a base que apresentou a maior dificuldade para 
-as redes \ac*{rbf} foi a base montada a partir da função seno.
+as redes \ac*{rbf} foi a base montada a partir da função seno. Enquanto que a
+base que apresentou menor dificuldade para as redes \ac*{rbf} foi a base montada 
+a partir da função logística.
 
 \section{Trabalhos Futuros}
 \label{trabalhos_futuros}
@@ -399,11 +410,37 @@ de subida/descida da bolsa de valores ou de preços de imóveis.
 \section{Conclusão}
 \label{conclusao}
 
-Os problemas de regressão se mostram bastante desa
+Os problemas de regressão são aqueles em que as saídas esperadas do modelo 
+assumem valores contínuos e existe uma noção de distância entre soluções. Apesar 
+de se mostrarem bastante desafiadores, é possível perceber uma predileção da 
+literatura por problemas de classificação.
 
-\section*{Agradecimentos}
-We acknowledge the acknowledged acknowledgees.
+\begin{figure}[b]
+	\caption{Modelo obtido pela rede \ac*{rbf} para a base construída a partir 
+		da função cosseno}
+	\label{fig:rsl_cos}
+	\centering
+	\includegraphics[width=0.40\textwidth]{cos_5v1_all_paper}
+\end{figure}
 
+A presente pesquisa tratou, então, do uso do algoritmo de aprendizado de máquina 
+conhecido como Redes Neurais \ac*{rbf} para encontrar modelos capazes de 
+capturar a relação entre uma variável dependente $Y$ e uma variável independente 
+$X$. Os resultados encontrados foram positivos e mostram que as redes \ac*{rbf} 
+são uma excelente alternativa para redes \ac*{mlp}, que possuem um treinamento 
+mais lento, para estes problemas.
+
+Além disso, este artigo apontou para algumas pesquisas que podem ser feitas no 
+futuro para incrementar este trabalho e incentivar o interesse da comunidade 
+científica pela aplicação de redes \ac*{rbf} em problemas de regressão.
+
+\begin{figure}[t]
+	\caption{Modelo obtido pela rede \ac*{rbf} para a base construída a partir 
+		da função logística}
+	\label{fig:rsl_logistic}
+	\centering
+	\includegraphics[width=0.40\textwidth]{f_5v1_all_paper}
+\end{figure}
 
 \bibliography{artigo}
 \bibliographystyle{IEEEtran}
