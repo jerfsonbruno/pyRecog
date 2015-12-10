@@ -82,14 +82,14 @@ discretos.
 
 Se as variáveis a serem estimadas forem valores futuros, então o procedimento 
 sendo construído é um preditor. Caso as variáveis a serem estimadas relacionem 
-entradas com saídas, então o procedimento sendo construído é chamado de modelo
-\cite{specht1991general}.
+entradas com saídas, então o procedimento sendo construído é chamado de 
+\textit{modelo} \cite{specht1991general}.
 
 Embora tenha sido largamente utilizada na literatura para problemas de 
 classificação (\cite{heartrbf}, \cite{wu2012using}, 
 \cite{DBLP:conf/isnn/ZhaoYWWL06}), há poucos trabalhos que mostram o potencial 
-das redes \ac*{rbf} para problemas de regressão. Este último será o problema 
-tratado no presente artigo.
+das redes \ac*{rbf} para problemas de regressão \cite{rojas2002time}. Este 
+último será o problema tratado no presente artigo.
 
 \subsection{Estrutura do Texto}
 \label{estrutura}
@@ -104,6 +104,38 @@ obtidos para problemas de regressão utilizando \acp*{rbf}; por fim, a seção
 
 \section{Trabalhos Relacionados}
 \label{relacionados}
+Nesta seção serão apresentados alguns trabalhos encontrados na literatura que 
+apresentam relação com a presente pesquisa e podem ser relevantes para entender 
+o contexto e motivações para sua realização.
+
+Em ambos \cite{orr1996introduction} e \cite{borsintroduction} fazem uma 
+introdução para as redes neurais \ac*{rbf}. Os autores descrevem as principais 
+propriedades focando na topologia e arquitetura, além de apresentar algumas das 
+motivações para seu uso e aplicações.
+
+\cite{wu2012using} discute algumas aplicações para as redes \ac*{rbf}, variando 
+de aplicações em visão computacional e modelagem de sistemas dinâmicos até 
+redes neurais \ac*{rbf} para sistemas com valores complexos. O objetivo do 
+trabalho é apresentar as \acp*{rbf} como alternativas para as \acp*{mlp} 
+principalmente para problemas de aproximação de função e classificação.
+
+Em \cite{heartrbf}, redes neurais \ac*{rbf} e de Regressão Generalizada são 
+utilizadas na tarefa de diagnosticar doenças do cardíacas e prescrever os 
+remédios necessários. O trabalho conclui que os resultados encontrados pela 
+aplicação das redes \ac*{rbf} são satisfatórios, tendo, inclusive, validado 
+com médicos.
+
+Em \cite{rojas2002time}, é proposto um \textit{framework} para construir e 
+treinar redes neurais \ac*{rbf}. Um algoritmo de aprendizado sequencial é 
+apresentado para adaptar a estrutura da rede, sendo possível criar novas 
+unidades na camada escondida, além de detectar e remover neurônios inativos.
+Mesmo tendo como foco a apresentação do inovador \textit{framework}, o trabalho 
+demonstra as vantagens do seu novo algoritmo de treinamento sequencial, através 
+dos resultados das redes treinadas para o problema de predizer séries temporais.
+
+Pode-se observar dos trabalhos relacionados que o uso extensivo das redes 
+\ac*{rbf} para problemas de classificação deixa uma lacuna a ser investigada: 
+se redes \ac*{rbf} são boas alternativas para problemas de regressão.
 
 \section{O Problema}
 \label{problema}
