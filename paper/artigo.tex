@@ -67,7 +67,7 @@ de aproximar funções. Ele é amplamente utilizado em diversos tipos de problem
 como regressão, classificação, extração de atributos e memória associativa 
 \cite{wu2012using}.
 
-Em 1988, Broomhead e Lowe propuseram o modelo de rede função de base radial, 
+Em 1988, Broomhead e Lowe propuseram o modelo de rede com função de base radial, 
 também conhecidas como \ac{rbf} \cite{2144306}. Essas redes, da mesma forma que 
 as \acp*{mlp} são universais, como mostrado em 
 \cite{Park:1991:UAU:110084.110093}, porém exigem um tempo mais curto para o 
@@ -78,15 +78,15 @@ treinamento, o que as torna excelentes alternativas.
 
 Enquanto que problemas de classificação envolvem identificar categorias para 
 uma determinada instância no conjunto de dados, regressão está ligada a estimar 
-ou prever uma resposta dada como entrada uma instância do conjunto de dados. 
+ou prever uma resposta, dada uma instância do conjunto de dados como entrada. 
 Os dois podem ser diferenciados também pelo fato de que qualquer resposta 
 para um problema de classificação é igualmente errada, ao passo que, na 
 regressão, existe uma ideia de distância entre as respostas: uma delas pode 
 estar mais próxima da resposta correta do que outra. De forma mais simples, 
-pode-se dizer que, nos problemas de classificação, as) variáveis de saída 
+pode-se dizer que, nos problemas de classificação, as variáveis de saída 
 assumem valores discretos, normalmente, rótulos de classes distintas. Por outro 
 lado, nos problemas de regressão, as variáveis de saída assumem valores 
-discretos.
+contínuos.
 
 Se as variáveis a serem estimadas forem valores futuros, então o procedimento 
 sendo construído é um preditor. Caso as variáveis a serem estimadas relacionem 
@@ -107,7 +107,7 @@ serão descritos alguns dos trabalhos relacionados ao tema da presente pesquisa;
 na seção \ref{problema} serão apresentados o problema sendo tratado e suas 
 principais características; na seção \ref{rbf} serão apresentadas as redes 
 \ac*{rbf}; na seção \ref{resultados} serão mostrados alguns dos resultados 
-obtidos para problemas de regressão utilizando \acp*{rbf} na seção 
+obtidos para problemas de regressão utilizando \acp*{rbf}; na seção 
 \ref{trabalhos_futuros} serão apresentados alguns dos possíveis trabalhos a 
 serem derivados a partir desta pesquisa; por fim, a seção \ref{conclusao} 
 conclui este trabalho com algumas considerações finais.
@@ -116,24 +116,25 @@ conclui este trabalho com algumas considerações finais.
 \label{relacionados}
 Nesta seção serão apresentados alguns trabalhos encontrados na literatura que 
 apresentam relação com a presente pesquisa e podem ser relevantes para entender 
-o contexto e motivações para sua realização.
+o contexto e as motivações para sua realização.
 
-Em ambos \cite{orr1996introduction} e \cite{borsintroduction} fazem uma 
+Ambos \cite{orr1996introduction} e \cite{borsintroduction} fazem uma 
 introdução para as redes neurais \ac*{rbf}. Os autores descrevem as principais 
 propriedades focando na topologia e arquitetura, além de apresentar algumas das 
 motivações para seu uso e aplicações.
 
-\cite{wu2012using} discute algumas aplicações para as redes \ac*{rbf}, variando 
-de aplicações em visão computacional e modelagem de sistemas dinâmicos até 
-redes neurais \ac*{rbf} para sistemas com valores complexos. O objetivo do 
-trabalho é apresentar as \acp*{rbf} como alternativas para as \acp*{mlp} 
-principalmente para problemas de aproximação de função e classificação.
+Em \cite{wu2012using}, são discutidas algumas aplicações para as redes 
+\ac*{rbf}, variando de aplicações em visão computacional e modelagem de sistemas 
+dinâmicos até redes neurais \ac*{rbf} para sistemas com valores complexos. O 
+objetivo do trabalho é apresentar as \acp*{rbf} como alternativas para as 
+\acp*{mlp} principalmente para problemas de aproximação de função e 
+classificação.
 
 Em \cite{heartrbf}, redes neurais \ac*{rbf} e de Regressão Generalizada são 
-utilizadas na tarefa de diagnosticar doenças do cardíacas e prescrever os 
+utilizadas na tarefa de diagnosticar doenças cardíacas e prescrever os 
 remédios necessários. O trabalho conclui que os resultados encontrados pela 
-aplicação das redes \ac*{rbf} são satisfatórios, tendo, inclusive, validado 
-com médicos.
+aplicação das redes \ac*{rbf} são satisfatórios, tendo sido, inclusive, 
+validados com médicos.
 
 Em \cite{rojas2002time}, é proposto um \textit{framework} para construir e 
 treinar redes neurais \ac*{rbf}. Um algoritmo de aprendizado sequencial é 
@@ -152,11 +153,12 @@ se redes \ac*{rbf} são boas alternativas para problemas de regressão.
 
 O problema de regressão \cite{specht1991general} pode ser definido da seguinte 
 forma: para uma determinada variável, $Y$, dependente em uma variável, $X$, 
-independente, é a computação do valor mais provável de $Y$ para cada valor de 
-$X$, tendo como base apenas um número finito de medições de $X$ (possivelmente 
-com ruídos) e seus respectivos valores de $Y$. Essas variáveis $X$ e $Y$ são, 
-normalmente, vetores. No sistema, a variável dependente, $Y$, é a saída, 
-enquanto que a variável independente, $X$ é a entrada.
+independente, o problema consiste da computação do valor mais provável de $Y$ 
+para cada valor de $X$, tendo como base apenas um número finito de medições de 
+$X$ (possivelmente com ruídos) e seus respectivos valores de $Y$. Essas 
+variáveis $X$ e $Y$ são, normalmente, vetores. No sistema, a variável 
+dependente, $Y$, é a saída, enquanto que a variável independente, $X$ é a 
+entrada.
 
 Observe, por exemplo, a figura \ref{fig:regressao}. Ela representa um 
 exemplo de tais dados, com os valores de $X$ e $Y$ nos eixos.
@@ -173,14 +175,14 @@ com parâmetros desconhecidos $a_{i}$. Os valores desses parâmetros são então
 calibrados para melhor ajuste da função aos dados observados. No caso da 
 regressão linear, por exemplo, a saída é assumida como uma função linear da 
 entrada, e assim, os parâmetros desconhecidos, $a_{i}$ seriam os coeficientes 
-lineares da função.
+lineares da função \cite{specht1991general}.
 
 Ou seja, o problema de regressão pode ser resumido em encontrar um modelo capaz 
 de prever corretamente (ou com menor erro possível) o valor da saída do sistema
 através do ajuste de parâmetros internos do modelo. A entrada para esse ajuste é 
 um conjunto $\{x_{i}, \hat{y}_{i}\}_{i=1}^{p}$. Onde $x_{i}$ é o valor da 
 $i$-ésima observação da variável independente $X$ e $\hat{y}_{i}$ é o valor da 
-variável dependente $Y$, dado o valor de $X$.
+variável dependente $Y$, dado o valor, $x_{i}$, de $X$.
 
 No decorrer deste trabalho, esse problema será tratado utilizando redes neurais 
 \acp*{rbf} para relacionar a entrada, $X$ e a saída, $Y$.
@@ -218,14 +220,18 @@ neural escondida e uma camada neural de saída \cite{wu2012using}. A figura
 	\node[draw=white] (12)  at (5,3.5) {$-\theta_{1}$};
 	\node[draw=white] (13)  at (5,1.5) {$-\theta_{n_{2}}$};
 	
-	\foreach \source/\dest in {1/5,1/6,1/8,2/5,2/6,2/8,4/5,4/6,4/8,5/9,5/11,6/9,6/11,8/9,8/11,12/9,13/11}
+	\node[draw=white] (14)  at (6,3) {$s_{1}$};
+	\node[draw=white] (16)  at (6,2) {...};
+	\node[draw=white] (15)  at (6,1) {$s_{n_{2}}$};
+	
+	\foreach \source/\dest in {1/5,1/6,1/8,2/5,2/6,2/8,4/5,4/6,4/8,5/9,5/11,6/9,6/11,8/9,8/11,12/9,13/11,9/14,11/15}
 	\draw[edge] (\source) to (\dest);
 	
 	\end{tikzpicture}
 	\label{fig:rbf}
 \end{figure}
 
-As grandes diferenças entre as \acp*{rbf} as redes \ac*{mlp} estão na função de 
+As grandes diferenças entre as \acp*{rbf} e as redes \ac*{mlp} estão na função de 
 ativação e no treinamento da camada neural escondida \cite{daredes}.
 
 As funções de ativação utilizadas nos neurônios da camada escondida são 
@@ -236,13 +242,15 @@ abaixo e ilustrada na figura \ref{fig:gaussian}.
 $$g(u) = e^{-\frac{(u-c)^{2}}{2\sigma^{2}}}$$
 
 Onde $c$ define o centro da função gaussiana e $\sigma^{2}$ denota a variância.
+A implementação das redes \ac*{rbf} realizadas para essa pesquisa utilizam 
+$\sigma^{2} = 1$.
 
 Já o treinamento das redes \ac*{rbf} é dividido em duas fases: uma fase não 
 supervisionada e uma supervisionada \cite{daredes}. Na primeira fase do 
 treinamento, são ajustados os pesos dos neurônios da camada escondida, que 
 efetivamente correspondem ao parâmetro $c$ da função gaussiana. Isso significa 
-que quanto mais próxima do centro de um determinado neurônio uma instância 
-estiver, maior será a saída daquele neurônio para aquela entrada.
+que quanto mais próxima do centro da função gaussiana de um determinado neurônio 
+uma instância estiver, maior será a saída daquele neurônio para aquela entrada.
 
 Um dos métodos mais utilizados para calcular os centros das gaussianas é o 
 algoritmo $k$-\textit{means} \cite{daredes}. O parâmetro $k$ desse algoritmo 
@@ -275,7 +283,7 @@ saída.
 \begin{table*}[t]
 	\centering
 	\caption{Resultados obtidos}
-	\label{corrmatrix}
+	\label{tbl:resultados}
 	\begin{tabular}{l c c l c c l c c}
 		\toprule
 		Logística & & & Seno & & & Cosseno & & \\
@@ -353,7 +361,7 @@ rede neural \ac*{rbf}. Uma vez que o treinamento foi finalizado, esse modelos
 foram utilizados para calcular o valor esperado de $y$, para cada uma das três 
 funções. Porém, para estas avaliações, foram utilizados quatrocentos valores ao 
 invés de apenas cinquenta. Além disso, o número de neurônios na camada escondida 
-foi variado entre 3 e 5. A métrica utilizada para avaliação foi o erro 
+foi variado entre 3 e 10. A métrica utilizada para avaliação foi o erro 
 quadrático médio definido por \cite{daredes} da seguinte forma: 
 
 $$E_{M} = \frac{1}{p}\sum_{k=1}^{p}\frac{1}{2}\sum_{i=1}^{n_{2}}
